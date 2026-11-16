@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>咖啡風味圖鑑網 | Coffee Flavor Atlas</title>
+  <style>
+    :root {
+      --bg-color: #FAF6F0;
+      --primary: #3E2723;
+      --accent: #C88A55;
+      --card-bg: #FFFFFF;
+      --text-main: #2C1E1A;
+      --text-muted: #6D5D57;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+    header {
+      background-color: var(--primary);
+      color: #FFF;
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+    header h1 { font-size: 2rem; margin-bottom: 0.5rem; letter-spacing: 1px; }
+    header p { color: #E0D5CE; max-width: 600px; margin: 0 auto; }
+    .container { max-width: 1000px; margin: 2.5rem auto; padding: 0 1.5rem; }
+    .filter-bar {
+      display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 2rem; justify-content: center;
+    }
+    .filter-btn {
+      border: 1px solid var(--primary); background: transparent; color: var(--primary);
+      padding: 0.4rem 1rem; border-radius: 999px; cursor: pointer; font-weight: 500; transition: 0.2s;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--primary); color: #FFF;
+    }
+    .card-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1.5rem;
+    }
+    .card {
+      background: var(--card-bg); border-radius: 12px; padding: 1.5rem;
+      box-shadow: 0 4px 14px rgba(62, 39, 35, 0.08);
+      display: flex; flex-direction: column; justify-content: space-between;
+      transition: transform 0.2s;
+    }
+    .card:hover { transform: translateY(-4px); }
+    .origin { font-size: 0.85rem; color: var(--accent); font-weight: 700; text-transform: uppercase; }
+    .card h2 { font-size: 1.25rem; margin: 0.3rem 0 0.75rem; color: var(--primary); }
+    .tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1rem; }
+    .tag { font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 6px; font-weight: 600; }
+    .tag-floral { background: #FCE4EC; color: #C2185B; }
+    .tag-nutty { background: #EFEBE9; color: #4E342E; }
+    .tag-roast { background: #FFF8E1; color: #F57F17; }
+    .desc { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 1.25rem; }
+    .btn-link {
+      display: inline-block; text-align: center; background: var(--primary); color: #FFF;
+      text-decoration: none; padding: 0.6rem 1rem; border-radius: 8px; font-size: 0.9rem; font-weight: 500;
+    }
+    .btn-link:hover { background: var(--accent); }
+    footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>☕ 咖啡風味圖鑑網</h1>
+    <p>收錄單品咖啡豆與膠囊的風味筆記、烘焙參數與特調指南，探索每一杯的香氣層次。</p>
+  </header>
+
+  <main class="container">
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterCards('all', this)">全部風味</button>
+      <button class="filter-btn" onclick="filterCards('floral', this)">花果酸香調</button>
+      <button class="filter-btn" onclick="filterCards('nutty', this)">堅果可可調</button>
+      <button class="filter-btn" onclick="filterCards('roast', this)">濃郁烘焙調</button>
+    </div>
+
+    <div class="card-grid">
+      <!-- 卡片 1 -->
+      <article class="card" data-category="floral">
+        <div>
+          <span class="origin">Ethiopia · 單品手沖</span>
+          <h2>衣索比亞 耶加雪菲 G1</h2>
+          <div class="tags">
+            <span class="tag tag-floral">茉莉花香</span>
+            <span class="tag tag-floral">檸檬柑橘</span>
+            <span class="tag tag-floral">水洗淺焙</span>
+          </div>
+          <p class="desc">入口帶有明亮的檸檬與佛手柑酸質，尾韻散發清新白花香氣與蜂蜜甜感，口感乾淨細緻。</p>
+        </div>
+        <a href="beans/ethiopia-yirgacheffe.html" class="btn-link">查看風味參數與沖煮建議 →</a>
+      </article>
+
+      <!-- 卡片 2 -->
+      <article class="card" data-category="nutty">
+        <div>
+          <span class="origin">Nespresso · 義式濃縮膠囊</span>
+          <h2>Arpeggio 紫羅蘭濃縮</h2>
+          <div class="tags">
+            <span class="tag tag-nutty">烘烤可可</span>
+            <span class="tag tag-roast">強度 9</span>
+            <span class="tag tag-nutty">綿密 Crema</span>
+          </div>
+          <p class="desc">以中南美洲阿拉比卡豆深度烘焙，擁有濃郁可可香氣與絲絨般醇厚口感，極適合搭配鮮奶。</p>
+        </div>
+        <a href="beans/nespresso-arpeggio.html" class="btn-link">查看風味參數與特調建議 →</a>
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    Coffee Flavor Atlas · 由 AGENTS.md 規範驅動之可擴充知識庫
+  </footer>
+
+  <script>
+    function filterCards(category, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.card').forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
