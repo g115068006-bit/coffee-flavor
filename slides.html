@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>新手咖啡入門：精品咖啡與沖煮科學 | LLM Wiki 教學簡報</title>
+  <style>
+    :root {
+      --bg: #FAF6F0;
+      --primary: #3E2723;
+      --accent: #C88A55;
+      --card: #FFFFFF;
+      --text: #2C1E1A;
+      --muted: #6D5D57;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 6px;
+      background: #E0D6CC;
+      width: 100%;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--accent);
+      width: 14.28%;
+      transition: width 0.3s ease;
+    }
+    .stage {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .slide {
+      display: none;
+      background: var(--card);
+      width: 100%;
+      max-width: 920px;
+      min-height: 500px;
+      padding: 3rem 3.5rem;
+      border-radius: 20px;
+      box-shadow: 0 12px 36px rgba(62, 39, 35, 0.1);
+      flex-direction: column;
+      justify-content: space-between;
+      animation: fadeIn 0.35s ease;
+    }
+    .slide.active { display: flex; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .wiki-badge {
+      display: inline-block;
+      background: #EFEBE9;
+      color: var(--primary);
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+      width: fit-content;
+    }
+    h1 { font-size: 2.4rem; color: var(--primary); line-height: 1.3; margin-bottom: 1rem; }
+    h2 { font-size: 1.85rem; color: var(--primary); margin-bottom: 1.25rem; }
+    p { font-size: 1.15rem; line-height: 1.75; color: var(--text); }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 1rem;
+    }
+    .box {
+      background: #FAF6F0;
+      padding: 1.35rem;
+      border-radius: 12px;
+      border-left: 4px solid var(--accent);
+    }
+    .box h3 { color: var(--primary); margin-bottom: 0.5rem; font-size: 1.2rem; }
+    .box p { font-size: 1rem; color: var(--muted); }
+    table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; }
+    th, td { border-bottom: 1px solid #EFEBE9; padding: 0.85rem; text-align: left; font-size: 1.05rem; }
+    th { color: var(--primary); background: #FAF6F0; width: 25%; }
+    .slide-footer {
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid #EFEBE9;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .controls {
+      background: var(--primary);
+      color: #FFF;
+      padding: 0.85rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .btn {
+      background: var(--accent);
+      color: #FFF;
+      border: none;
+      padding: 0.55rem 1.25rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .home-link { color: #FAF6F0; text-decoration: none; font-size: 0.95rem; }
+  </style>
+</head>
+<body>
+  <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+
+  <div class="stage">
+    <!-- Slide 1 -->
+    <div class="slide active">
+      <div>
+        <span class="wiki-badge">📚 知識來源：LLM Wiki (5 篇結構化咖啡條目)</span>
+        <h1>☕ 5 分鐘搞懂精品咖啡與沖煮科學</h1>
+        <p>專為咖啡新手設計的零門檻教學簡報：從生豆品種、處理法、烘焙科學到黃金萃取參數，帶你一次掌握一杯好咖啡背後的秘密。</p>
+        <div class="box" style="margin-top: 1.75rem;">
+          <h3>🎯 本堂課學習目標</h3>
+          <p>1. 分辨阿拉比卡與羅布斯塔的風味差異 ｜ 2. 看懂水洗、日曬與烘焙度標籤 ｜ 3. 掌握手沖與義式濃縮的四大萃取變數</p>
+        </div>
+      </div>
+      <div class="slide-footer"><span>使用鍵盤 ← → 方向鍵或下方按鈕切換投影片</span><span>1 / 7</span></div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="slide">
+      <div>
+        <span class="wiki-badge">Wiki 條目：[[01-coffee-varieties]]</span>
+        <h2>1. 咖啡豆的兩大家族：品種決定先天基因</h2>
+        <p>全球商業咖啡豆主要分為兩大品種，它們的生長海拔與咖啡因含量直接決定了口感走向：</p>
+        <div class="grid-2">
+          <div class="box">
+            <h3>🌿 阿拉比卡 (Arabica)</h3>
+            <p>• 佔全球產量 60%–70%，生長於高海拔。<br>• 糖分與脂質高，帶有<strong>花果酸香與焦糖甜感</strong>。<br>• 咖啡因較低（1.2%–1.5%），精品單品首選。</p>
+          </div>
+          <div class="box">
+            <h3>🔥 羅布斯塔 (Robusta)</h3>
+            <p>• 生長於低海拔，抗病蟲害能力強。<br>• 咖啡因高（2.2%–2.7%），口感<strong>濃苦厚實、油脂豐富</strong>。<br>• 常見於傳統義式配方豆與即溶咖啡。</p>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer"><span>資料驗證：100% 源自 wiki/01-coffee-varieties.md</span><span>2 / 7</span></div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="slide">
+      <div>
+        <span class="wiki-badge">Wiki 條目：[[02-processing-methods]]</span>
+        <h2>2. 生豆處理法：決定「乾淨酸香」或「濃郁果甜」</h2>
+        <p>咖啡豆是果實的種子，採收後去除果皮與果肉的乾燥方式稱為處理法：</p>
+        <div class="grid-3">
+          <div class="box">
+            <h3>💧 水洗處理 (Washed)</h3>
+            <p>水槽發酵洗去果膠後乾燥。風味<strong>最乾淨、柑橘與花香酸質明亮</strong>，能展現產區原始風土。</p>
+          </div>
+          <div class="box">
+            <h3>☀️ 日曬處理 (Natural)</h3>
+            <p>整顆果實直接日曬，果肉糖分滲入豆芯。帶有<strong>熱帶水果、莓果乾與微醺甜感</strong>。</p>
+          </div>
+          <div class="box">
+            <h3>🍯 蜜處理 (Honey)</h3>
+            <p>保留黏稠果膠日曬。酸甜平衡度極佳，帶有<strong>蜂蜜與焦糖般的滑順口感</strong>。</p>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer"><span>資料驗證：100% 源自 wiki/02-processing-methods.md</span><span>3 / 7</span></div>
+    </div>
+
+    <!-- Slide 4 -->
+    <div class="slide">
+      <div>
+        <span class="wiki-badge">Wiki 條目：[[03-roast-levels]]</span>
+        <h2>3. 烘焙度的科學：熱能轉化香氣的光譜</h2>
+        <p>透過高溫引發「梅納反應」與「焦糖化反應」，不同烘焙程度會呈現截然不同的酸苦平衡：</p>
+        <table>
+          <tr><th>烘焙程度</th><th>風味特徵</th><th>適合飲用方式</th></tr>
+          <tr><td><strong>淺烘焙 (Light)</strong></td><td>保留最多花果酸香與清爽茶感，咖啡因保留較多</td><td>單品手沖黑咖啡、冰美式</td></tr>
+          <tr><td><strong>中烘焙 (Medium)</strong></td><td>酸質轉為柔和甜感，帶有堅果、焦糖與牛奶巧克力香</td><td>日常黑咖啡、美式咖啡</td></tr>
+          <tr><td><strong>深烘焙 (Dark)</strong></td><td>果酸消失，轉為濃郁黑巧克力、煙燻與烘烤木質調</td><td>義式濃縮、拿鐵（搭配鮮奶）</td></tr>
+        </table>
+      </div>
+      <div class="slide-footer"><span>資料驗證：100% 源自 wiki/03-roast-levels.md</span><span>4 / 7</span></div>
+    </div>
+
+    <!-- Slide 5 -->
+    <div class="slide">
+      <div>
+        <span class="wiki-badge">Wiki 條目：[[04-extraction-variables]]</span>
+        <h2>4. 咖啡萃取四大黃金變數（目標萃取率 18%–22%）</h2>
+        <p>萃取不足（&lt;18%）會尖酸鹹澀；過度萃取（&gt;22%）則會焦苦雜澀。掌握四大變數就能穩定沖出好咖啡：</p>
+        <div class="grid-2">
+          <div class="box">
+            <h3>⚖️ 粉水比 &amp; 研磨度</h3>
+            <p>• <strong>粉水比</strong>：手沖黃金比例 <strong>1:15</strong>（15g 粉配 225ml 水）。<br>• <strong>研磨度</strong>：手沖用二砂糖粒大小；義式需極細研磨。</p>
+          </div>
+          <div class="box">
+            <h3>🌡️ 水溫 &amp; 萃取時間</h3>
+            <p>• <strong>水溫</strong>：淺焙用 <strong>90–93°C</strong> 釋放果香；深焙用 <strong>85–88°C</strong> 避苦。<br>• <strong>時間</strong>：手沖約 2 分半；高壓義式僅需 25–30 秒。</p>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer"><span>資料驗證：100% 源自 wiki/04-extraction-variables.md</span><span>5 / 7</span></div>
+    </div>
+
+    <!-- Slide 6 -->
+    <div class="slide">
+      <div>
+        <span class="wiki-badge">Wiki 條目：[[05-brewing-methods]]</span>
+        <h2>5. 沖煮方式對決：手沖濾杯 vs. 義式濃縮</h2>
+        <div class="grid-2">
+          <div class="box">
+            <h3>🫖 手沖濾杯 (Pour-Over / V60)</h3>
+            <p>• <strong>原理</strong>：重力常壓萃取 ＋ 濾紙過濾油脂。<br>• <strong>口感</strong>：湯色清澈、香氣層次分明。<br>• <strong>推薦</strong>：淺中焙單品豆（如衣索比亞耶加雪菲）。</p>
+          </div>
+          <div class="box">
+            <h3>⚡ 義式濃縮 / 膠囊機 (Espresso)</h3>
+            <p>• <strong>原理</strong>：9 Bar 高壓熱水 30 秒快速萃取。<br>• <strong>口感</strong>：濃郁厚實，表面帶有綿密金黃油脂（Crema）。<br>• <strong>推薦</strong>：中深焙配方豆或膠囊（如 Arpeggio）。</p>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer"><span>資料驗證：100% 源自 wiki/05-brewing-methods.md</span><span>6 / 7</span></div>
+    </div>
+
+    <!-- Slide 7 -->
+    <div class="slide">
+      <div>
+        <span class="wiki-badge">🎓 總結與知識庫延伸</span>
+        <h2>新手選豆與沖煮 3 秒速查表</h2>
+        <div class="box" style="margin-bottom: 1.25rem;">
+          <h3>🌸 喜歡清爽花果酸香、喝黑咖啡</h3>
+          <p>選擇 <strong>高海拔阿拉比卡 ＋ 水洗處理 ＋ 淺烘焙</strong> $\rightarrow$ 使用 <strong>V60 手沖（91°C、粉水比 1:15）</strong>。</p>
+        </div>
+        <div class="box">
+          <h3>🍫 喜歡濃郁可可堅果、加鮮奶喝拿鐵</h3>
+          <p>選擇 <strong>中深烘焙配方豆或膠囊</strong> $\rightarrow$ 使用 <strong>義式濃縮（87°C、高壓萃取）＋ 綿密熱奶泡</strong>。</p>
+        </div>
+      </div>
+      <div class="slide-footer"><span>本簡報由 LLM Wiki 自動彙整生成，內容 100% 可追溯來源</span><span>7 / 7</span></div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <a href="index.html" class="home-link">← 返回咖啡風味圖鑑首頁</a>
+    <div>
+      <button class="btn" id="prevBtn" onclick="changeSlide(-1)">← 上一頁</button>
+      <span id="pageIndicator" style="margin: 0 1rem; font-weight: 600;">1 / 7</span>
+      <button class="btn" id="nextBtn" onclick="changeSlide(1)">下一頁 →</button>
+    </div>
+  </div>
+
+  <script>
+    let current = 0;
+    const slides = document.querySelectorAll('.slide');
+    const progress = document.getElementById('progress');
+    const indicator = document.getElementById('pageIndicator');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    function updateSlide() {
+      slides.forEach((s, i) => s.classList.toggle('active', i === current));
+      progress.style.width = ((current + 1) / slides.length * 100) + '%';
+      indicator.textContent = `${current + 1} / ${slides.length}`;
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === slides.length - 1;
+    }
+
+    function changeSlide(dir) {
+      const next = current + dir;
+      if (next >= 0 && next < slides.length) {
+        current = next;
+        updateSlide();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') changeSlide(1);
+      if (e.key === 'ArrowLeft') changeSlide(-1);
+    });
+
+    updateSlide();
+  </script>
+</body>
+</html>
